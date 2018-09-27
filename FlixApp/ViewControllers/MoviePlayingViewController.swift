@@ -10,17 +10,15 @@ import UIKit
 import AlamofireImage
 
 
-class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating{
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-    
+class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet weak var searchBar: UISearchBar!
     
+    var filteredMovies: [[String: Any]]?
     var movies: [[String: Any]] = []
-    var searchController: UISearchController!
     var reasultsController = UITableViewController()
     var refreshControl: UIRefreshControl!
     
@@ -28,9 +26,8 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.searchController = UISearchController(searchResultsController: self.reasultsController)
-        self.tableView.tableHeaderView = self.searchController.searchBar
-        self.searchController.searchResultsUpdater = self
+        searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.addTarget(self, action: #selector(MoviePlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
@@ -41,7 +38,6 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
         
         tableView.insertSubview(refreshControl, at: 0)
         tableView.dataSource = self
-        //searchBar.delegate = self
         fetchMovies()
         
     }
@@ -65,22 +61,32 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
                 print(error.localizedDescription)
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
-                //print(dataDictionary)
                 self.movies = dataDictionary["results"] as! [[String: Any]]
                 self.tableView.reloadData()
-                
             }
             self.refreshControl.endRefreshing()
         }
         task.resume()
         activityIndicator.stopAnimating()
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.filteredMovies = searchText.isEmpty ? self.movies : self.movies.filter({(movie) -> Bool in
+            return (movie["title"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        })
+        self.tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return self.movies.count
+        if self.searchBar.text!.isEmpty{
+            return self.movies.count
+        }else{
+            return filteredMovies?.count ?? 0
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let movie = movies[indexPath.row]
+        let movie = self.searchBar.text!.isEmpty ? movies[indexPath.row] : filteredMovies![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         cell.titleLabel.text = title

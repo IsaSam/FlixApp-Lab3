@@ -10,15 +10,19 @@ import UIKit
 
 enum MovieKeys {
     static let title = "title"
+    static let movieID = "id"
 }
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var backDropImageView: UIImageView!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var playMoviesButton: UIBarButtonItem!
+    @IBOutlet weak var playMoviesImageButton: UIButton!
+    @IBOutlet weak var playMoviesBackButton: UIButton!
     
     var movie: [String: Any]?
     
@@ -35,10 +39,16 @@ class DetailViewController: UIViewController {
             let backdropURL = URL(string: posterBaseUrl + backdropPathString)!
             backDropImageView.af_setImage(withURL: backdropURL)
             let posterPathURL = URL(string: posterBaseUrl + posterPathString)!
-            //backDropImageView.af_setImage(withURL: posterPathURL)
             posterImageView.af_setImage(withURL: posterPathURL)
         }
 
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! webViewTraillerViewController
+        if let movie = movie{
+            let movieID = String(describing: movie[MovieKeys.movieID]!)
+            vc.movieId = movieID
+        }
     }
 
     override func didReceiveMemoryWarning() {

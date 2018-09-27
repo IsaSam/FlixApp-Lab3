@@ -17,6 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" barStyle="black" placeholder="Search Movies..." id="Xxz-oR-Cag">
+                                <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.18823529411764706" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oci-X6-Hw8">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,6 +77,7 @@
                     <navigationItem key="navigationItem" title="Movies" id="jWH-0Z-hYS"/>
                     <connections>
                         <outlet property="activityIndicator" destination="8kz-lX-Gy5" id="nHM-gC-WJd"/>
+                        <outlet property="searchBar" destination="Xxz-oR-Cag" id="UVE-hM-ydy"/>
                         <outlet property="tableView" destination="Oci-X6-Hw8" id="raG-Km-27T"/>
                     </connections>
                 </viewController>
@@ -86,6 +93,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LP9-yA-cos">
+                                <rect key="frame" x="0.0" y="64" width="320" height="227"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="nx9-Ut-T1I" kind="push" identifier="playMoviesBack" id="eng-a3-O0M"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="WXm-UV-PIh">
                                 <rect key="frame" x="0.0" y="64" width="320" height="227"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,6 +112,13 @@
                                 <color key="textColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="0.74743150684931503" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tKd-G8-F3O">
+                                <rect key="frame" x="20" y="196" width="100" height="175"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="nx9-Ut-T1I" kind="push" identifier="playSegue1" id="TnK-fn-FwB"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="vqr-tG-kmk">
                                 <rect key="frame" x="20" y="196" width="100" height="175"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -119,10 +140,19 @@
                         </subviews>
                         <color key="backgroundColor" red="0.16862745098039217" green="0.0" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mrB-0I-oSN"/>
+                    <navigationItem key="navigationItem" id="mrB-0I-oSN">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="play" id="LIp-FR-8j3">
+                            <connections>
+                                <segue destination="nx9-Ut-T1I" kind="push" id="X1R-2T-ZJB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="backDropImageView" destination="WXm-UV-PIh" id="DD4-CX-lAZ"/>
                         <outlet property="overviewLabel" destination="5ly-vF-ykS" id="VBp-H6-HeS"/>
+                        <outlet property="playMoviesBackButton" destination="LP9-yA-cos" id="6Ck-X4-7tt"/>
+                        <outlet property="playMoviesButton" destination="LIp-FR-8j3" id="W0p-XH-wpP"/>
+                        <outlet property="playMoviesImageButton" destination="tKd-G8-F3O" id="zku-kf-PFO"/>
                         <outlet property="posterImageView" destination="vqr-tG-kmk" id="SNU-Is-HQy"/>
                         <outlet property="releaseDateLabel" destination="36g-7u-AhE" id="Rox-ax-wv4"/>
                         <outlet property="titleLabel" destination="BMu-z5-G0e" id="bCj-Gr-dcz"/>
@@ -131,6 +161,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpd-mW-tVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1514" y="148"/>
+        </scene>
+        <!--Web View Trailler View Controller-->
+        <scene sceneID="Cm0-yM-ZTf">
+            <objects>
+                <viewController id="nx9-Ut-T1I" customClass="webViewTraillerViewController" customModule="FlixApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bEP-y3-Kj0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" misplaced="YES" id="j0G-Zv-rwd">
+                                <rect key="frame" x="0.0" y="45" width="320" height="523"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Rh-xR-1Oy"/>
+                    <connections>
+                        <outlet property="webViewTrailler" destination="j0G-Zv-rwd" id="VZh-KU-myy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8x3-tc-lVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1514" y="850"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="8jk-eH-VPh">
@@ -177,7 +232,7 @@
             </objects>
             <point key="canvasLocation" x="85" y="148"/>
         </scene>
-        <!--Movies Collections-->
+        <!--Super Hero Collections-->
         <scene sceneID="c9X-by-wIr">
             <objects>
                 <viewController id="TA3-Nc-bmN" customClass="SuperheroViewController" customModule="FlixApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -219,7 +274,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies Collections" id="esb-Xz-Ocg"/>
+                    <navigationItem key="navigationItem" title="Super Hero Collections" id="esb-Xz-Ocg"/>
                     <connections>
                         <outlet property="collectionView" destination="INJ-7m-BXM" id="k15-Ln-erc"/>
                     </connections>
@@ -258,6 +313,7 @@
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="eng-a3-O0M"/>
         <segue reference="fF6-Qv-Qsn"/>
     </inferredMetricsTieBreakers>
 </document>
