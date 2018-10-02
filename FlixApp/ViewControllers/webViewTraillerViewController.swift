@@ -11,6 +11,7 @@ import UIKit
 class webViewTraillerViewController: UIViewController {
 
     @IBOutlet weak var webViewTrailler: UIWebView!
+    @IBOutlet weak var activityIndicatorWeb: UIActivityIndicatorView!
     
     var movieId: String?
     var traillerKeys: [String] = []
@@ -20,7 +21,7 @@ class webViewTraillerViewController: UIViewController {
        trailer()
     }
     func trailer(){
-        
+        activityIndicatorWeb.startAnimating()
         // Do any additional setup after loading the view.
         if let movieId = movieId {
             let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)/videos?api_key=5f89533e24a2ff0828389c5e1cb6f8e8&language=en-US")!
@@ -28,6 +29,7 @@ class webViewTraillerViewController: UIViewController {
             let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
             let task = session.dataTask(with: request) { (data, response, error) in
                 if let error = error {
+                    self.activityIndicatorWeb.stopAnimating()
                     let errorAlertController = UIAlertController(title: "Cannot Get Trailer", message: "The Internet connections appears to be offline.", preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: "Retry", style: .cancel)
                     errorAlertController.addAction(cancelAction)
@@ -49,10 +51,13 @@ class webViewTraillerViewController: UIViewController {
                         let youtubeURL = URL(string: "https://www.youtube.com/watch?v=\(key)")!
                         let request = URLRequest(url: youtubeURL)
                         self.webViewTrailler.loadRequest(request)
+                        self.activityIndicatorWeb.stopAnimating()
+                        
                     }
                 }
             }
             task.resume()
+            
         }
     }
 

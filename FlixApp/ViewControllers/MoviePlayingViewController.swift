@@ -63,11 +63,14 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
                 self.movies = dataDictionary["results"] as! [[String: Any]]
                 self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
             }
+            
             self.refreshControl.endRefreshing()
+            self.activityIndicator.stopAnimating()
         }
         task.resume()
-        activityIndicator.stopAnimating()
+        //activityIndicator.stopAnimating()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -92,6 +95,7 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
         cell.titleLabel.text = title
         cell.overviewTextView.text = overview
         
+        
         if let posterPath = movie["poster_path"] as? String{
             let posterBaseUrl = "https://image.tmdb.org/t/p/w500"
             let posterUrl = URL(string:  posterBaseUrl + posterPath)
@@ -106,6 +110,7 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
