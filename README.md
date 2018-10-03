@@ -39,6 +39,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
+<img src='FlixLab3Video_.gif' title='Video Walkthrough Lab 3' width='' alt='Video Walkthrough Flix Lab 3' />
 <img src='FlixLab3Video.gif' title='Video Walkthrough Lab 3' width='' alt='Video Walkthrough Flix Lab 3' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
