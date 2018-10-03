@@ -11,21 +11,24 @@ import UIKit
 class SuperheroViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var AcitivityIndicatorHero: UIActivityIndicatorView!
     
     var movies: [[String: Any]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AcitivityIndicatorHero.startAnimating()
         collectionView.dataSource = self
-        
+       /*
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = layout.minimumInteritemSpacing
         let cellsPerLine: CGFloat = 3
         let interItemSpacingTotal = layout.minimumInteritemSpacing * (cellsPerLine - 1)
         let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
-        layout.itemSize = CGSize(width: width, height: width * 3 / 2)
+        layout.itemSize = CGSize(width: width, height: width * 3 / 2)*/
+        
         fetchMovies()
 
     }
@@ -64,6 +67,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIC
                 //print(dataDictionary)
                 self.movies = dataDictionary["results"] as! [[String: Any]]
                 self.collectionView.reloadData()
+                self.AcitivityIndicatorHero.stopAnimating()
                 
             }
             //self.refreshControl.endRefreshing()

@@ -70,7 +70,6 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
             self.activityIndicator.stopAnimating()
         }
         task.resume()
-        //activityIndicator.stopAnimating()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -94,6 +93,11 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
         let overview = movie["overview"] as! String
         cell.titleLabel.text = title
         cell.overviewTextView.text = overview
+        
+        // Select Background color
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor(red:0.50, green:0.00, blue:0.00, alpha:1.0)
+        cell.selectedBackgroundView = backgroundView
         
         
         if let posterPath = movie["poster_path"] as? String{

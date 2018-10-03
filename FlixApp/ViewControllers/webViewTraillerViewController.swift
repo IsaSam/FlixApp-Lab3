@@ -45,6 +45,7 @@ class webViewTraillerViewController: UIViewController {
                             self.traillerKeys.append(String(describing: video["key"]!))
                         }
                     }
+                    
                     if (self.traillerKeys.count > 0){
                         //let key = self.trailerKeys[0]
                         let key = self.traillerKeys[0]
@@ -52,12 +53,12 @@ class webViewTraillerViewController: UIViewController {
                         let request = URLRequest(url: youtubeURL)
                         self.webViewTrailler.loadRequest(request)
                         self.activityIndicatorWeb.stopAnimating()
-                        
                     }
+                    
                 }
+                
             }
             task.resume()
-            
         }
     }
 

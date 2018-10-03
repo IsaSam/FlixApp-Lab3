@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -109,7 +110,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LP9-yA-cos">
                                 <rect key="frame" x="0.0" y="64" width="320" height="227"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <segue destination="nx9-Ut-T1I" kind="push" identifier="playMoviesBack" id="eng-a3-O0M"/>
                                 </connections>
@@ -128,7 +129,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKd-G8-F3O">
                                 <rect key="frame" x="20" y="196" width="100" height="175"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <segue destination="nx9-Ut-T1I" kind="push" identifier="playSegue1" id="TnK-fn-FwB"/>
                                 </connections>
@@ -277,29 +278,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="INJ-7m-BXM">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="32" width="320" height="536"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.18823529411764706" green="0.0" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bjL-Qa-gcf">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="bjL-Qa-gcf">
                                     <size key="itemSize" width="100" height="185"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="e2I-0l-zUi">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="536"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <color key="color" red="1" green="0.0" blue="0.33385021129999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PosterCell" id="iGd-8o-P8o" customClass="PosterCell" customModule="FlixApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="185"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="185"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0tF-gg-yFD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="200"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0tF-gg-yFD">
+                                                    <rect key="frame" x="2" y="0.0" width="96" height="183"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="96" id="89l-RJ-c3S"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="96" id="Gfn-sc-in0"/>
+                                                        <constraint firstAttribute="height" constant="183.5" id="MgH-ye-3PJ"/>
+                                                        <constraint firstAttribute="width" secondItem="0tF-gg-yFD" secondAttribute="height" multiplier="32:61" id="S7C-wi-PGM"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="183.5" id="X7W-xB-76N"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="0tF-gg-yFD" firstAttribute="top" secondItem="iGd-8o-P8o" secondAttribute="top" id="AHr-jU-UKx"/>
+                                            <constraint firstItem="0tF-gg-yFD" firstAttribute="leading" secondItem="iGd-8o-P8o" secondAttribute="leading" constant="2" id="HmO-7N-Xfp"/>
+                                            <constraint firstAttribute="bottom" secondItem="0tF-gg-yFD" secondAttribute="bottom" constant="2" id="J61-gY-gMJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="0tF-gg-yFD" secondAttribute="trailing" constant="2" id="lSY-TO-nHV"/>
+                                        </constraints>
+                                        <size key="customSize" width="100" height="185"/>
                                         <connections>
                                             <outlet property="posterImageView" destination="0tF-gg-yFD" id="Nea-gq-fJL"/>
                                             <segue destination="Y2Y-UA-c4w" kind="push" id="fF6-Qv-Qsn"/>
@@ -312,6 +331,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Super Hero Collections" id="esb-Xz-Ocg"/>
                     <connections>
+                        <outlet property="AcitivityIndicatorHero" destination="e2I-0l-zUi" id="qW1-SL-sTe"/>
                         <outlet property="collectionView" destination="INJ-7m-BXM" id="k15-Ln-erc"/>
                     </connections>
                 </viewController>
@@ -350,6 +370,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eng-a3-O0M"/>
-        <segue reference="rlS-bd-Ymw"/>
+        <segue reference="fF6-Qv-Qsn"/>
     </inferredMetricsTieBreakers>
 </document>
